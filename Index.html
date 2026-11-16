@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>أنشطة الورشة</title>
+<style>
+  /* Layout: a sticky strip of four numerals; one activity on screen at a time.
+     Tool lists sit beside open working areas the group fills in. */
+  :root {
+    --bg: #F4F7F7;
+    --surface: #FFFFFF;
+    --surface-2: #E9F0F1;
+    --ink: #12262B;
+    --muted: #5A6E73;
+    --line: #D6DFE1;
+    --line-strong: #B5C4C7;
+    --accent: #0B5D6B;
+    --accent-soft: #DCEEF1;
+    --on-accent: #FFFFFF;
+
+    --font: "Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1719;
+      --surface: #142226;
+      --surface-2: #1B2E33;
+      --ink: #E6F0F1;
+      --muted: #93AAB0;
+      --line: #27393E;
+      --line-strong: #3C555B;
+      --accent: #5CC2D1;
+      --accent-soft: #17353B;
+      --on-accent: #0D1719;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1719;
+    --surface: #142226;
+    --surface-2: #1B2E33;
+    --ink: #E6F0F1;
+    --muted: #93AAB0;
+    --line: #27393E;
+    --line-strong: #3C555B;
+    --accent: #5CC2D1;
+    --accent-soft: #17353B;
+    --on-accent: #0D1719;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.8;
+    direction: rtl;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 30;
+    background: var(--bg);
+  }
+  .wrap {
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .en { color: var(--muted); font-weight: 400; font-size: .82em; unicode-bidi: isolate; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Top strip */
+  .nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .75rem; }
+  .brand { font-weight: 500; color: var(--muted); letter-spacing: .01em; }
+  .tabs { display: flex; gap: .5rem; }
+  .tab {
+    width: 2.75rem; height: 2.75rem;
+    display: grid; place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 1.15rem; font-weight: 500; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--accent); }
+  .tab[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+  /* Activity header */
+  .head { padding-block: 2.25rem 1.75rem; display: grid; gap: .75rem; }
+  h1 {
+    margin: 0;
+    display: flex; align-items: baseline; gap: .65rem;
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    font-weight: 500; line-height: 1.2;
+    text-wrap: balance;
+  }
+  h1 .num { line-height: 1; font-size: 1.9em; font-weight: 200; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .lead { margin: 0; max-width: 46rem; font-size: 1.15rem; color: var(--ink); text-wrap: pretty; }
+  .lead strong { font-weight: 600; }
+
+  /* Activity 1 cards */
+  .cards { display: grid; gap: 1rem; grid-template-columns: 1fr; padding-bottom: 1rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    display: grid; gap: .75rem; align-content: start;
+    min-width: 0;
+  }
+  .card .n { font-size: 1.9rem; font-weight: 300; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .card p { margin: 0; font-size: 1.06rem; text-wrap: pretty; }
+  .opts { display: grid; gap: .4rem; margin-top: .25rem; }
+  .opt {
+    display: flex; align-items: center; gap: .65rem;
+    width: 100%;
+    padding: .55rem .8rem;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+    font: inherit; font-size: .98rem; line-height: 1.5;
+    text-align: start;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .opt:hover { border-color: var(--accent); }
+  .opt .dot { flex: none; width: .95rem; height: .95rem; border-radius: 50%; border: 1.5px solid var(--line-strong); transition: all .15s; }
+  .opt .en { margin-inline-start: auto; }
+  .opt[aria-checked="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .opt[aria-checked="true"] .dot { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 0 0 2.5px var(--accent-soft); }
+
+  /* Activities 2-4: tool list + working areas */
+  .split { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); padding-bottom: 1rem; align-items: start; }
+  .tools-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: .35rem 1.1rem;
+  }
+  .tools { list-style: none; margin: 0; padding: 0; display: grid; }
+  .tools li {
+    display: flex; gap: .75rem; align-items: baseline;
+    padding: .5rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem; line-height: 1.55;
+  }
+  .tools li:last-child { border-bottom: 0; }
+  .tools .tn { flex: none; width: 1.6rem; color: var(--accent); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  .areas { display: grid; gap: 2rem; min-width: 0; }
+  .band { display: grid; gap: .75rem; }
+  .band-title { margin: 0; font-size: 1.1rem; font-weight: 600; line-height: 1.5; display: flex; flex-wrap: wrap; gap: .1rem .5rem; align-items: baseline; }
+  .zones { display: grid; gap: .75rem; grid-template-columns: 1fr; }
+  .zone { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+  .zone-head {
+    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+    padding: .65rem 1rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    border-radius: 7px 7px 0 0;
+    font-weight: 500; line-height: 1.5;
+  }
+  .zone-head .label { display: grid; }
+  .zone-body { min-height: 9rem; }
+  .bars { flex: none; display: inline-flex; align-items: flex-end; gap: 3px; height: 14px; }
+  .bars i { width: 5px; border-radius: 1px; background: var(--line-strong); }
+  .bars i:nth-child(1) { height: 6px; }
+  .bars i:nth-child(2) { height: 10px; }
+  .bars i:nth-child(3) { height: 14px; }
+  .bars[data-l="1"] i:nth-child(1),
+  .bars[data-l="2"] i:nth-child(-n+2),
+  .bars[data-l="3"] i { background: var(--accent); }
+
+  /* Pager */
+  .pager { display: flex; padding-block: 1.5rem 3rem; margin-top: 1.5rem; border-top: 1px solid var(--line); }
+  .pager a { color: var(--accent); text-decoration: none; font-weight: 500; padding-block: .25rem; }
+  .pager a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .pager .next { margin-inline-start: auto; }
+
+  @media (min-width: 640px) and (max-width: 999px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+    .cards .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+  @media (min-width: 640px) {
+    .zones { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tools-panel .tools { grid-auto-flow: column; grid-template-rows: repeat(9, auto); column-gap: 2rem; }
+    .tools li:nth-child(9) { border-bottom: 0; }
+  }
+  @media (min-width: 1000px) {
+    .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .split { grid-template-columns: 17.5rem minmax(0, 1fr); gap: 2rem; }
+    .tools-panel .tools { grid-auto-flow: row; grid-template-rows: none; }
+    .tools li:nth-child(9) { border-bottom: 1px solid var(--line); }
+    .tools li:last-child { border-bottom: 0; }
+  }
+  @media (min-width: 640px) {
+    .seq .zones { gap: 1.5rem; }
+    .seq .zone:not(:last-child)::after {
+      content: ""; position: absolute; top: 1.2rem; left: -1.1rem;
+      width: .55rem; height: .55rem;
+      border-left: 2px solid var(--line-strong); border-bottom: 2px solid var(--line-strong);
+      transform: rotate(45deg);
+    }
+  }
+  @media (max-width: 420px) {
+    .brand { font-size: .95rem; }
+    .tab { width: 2.5rem; height: 2.5rem; }
+    .tabs { gap: .4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* Matching board — deliberately compact and consistent with the original page. */
+  .bank-title { padding: .7rem 0 .45rem; font-size: 1.02rem; font-weight: 600; color: var(--muted); }
+  .bank-panel { min-width: 0; }
+  .bank { display: flex; flex-direction: column; gap: .46rem; padding: .25rem 0 .85rem; }
+  .token {
+    display: flex; gap: .65rem; align-items: flex-start; text-align: right;
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 6px; color: var(--ink); width: 100%; padding: .55rem .7rem;
+    font: inherit; font-size: .96rem; line-height: 1.65; cursor: grab;
+    touch-action: none; user-select: none; -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .12s, background .12s, opacity .12s;
+  }
+  .token:hover, .token:focus-visible { border-color: var(--accent); }
+  .token:active { cursor: grabbing; }
+  .token .tn { width: 1.35rem; flex: 0 0 auto; color: var(--accent); font-weight: 600; font-size: .96rem; }
+  .token .token-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .token.is-selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .token.is-dragging { opacity: .55; }
+  .token.is-complete { border-color: var(--line); background: var(--bg); }
+  .token .count { display: inline-block; font-size: .76rem; font-weight: 500; color: var(--accent); white-space: nowrap; }
+  .zone { transition: border-color .12s, box-shadow .12s, background .12s; }
+  .zone[role="button"] { cursor: pointer; }
+  .zone:hover, .zone:focus-visible { border-color: var(--accent); }
+  .zone.is-hover { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); background: var(--accent-soft); }
+  .zone-body { min-height: 9rem; padding: .55rem; display: flex; flex-direction: column; gap: .4rem; }
+  .zone-body:empty::before { content: "اسحب البطاقات هنا"; display: grid; place-items: center; min-height: 7.4rem; text-align: center; color: var(--muted); font-size: .85rem; }
+  .placed { display: flex; gap: .3rem; align-items: stretch; width: 100%; }
+  .placed .token { flex: 1; min-width: 0; padding: .45rem .5rem; background: var(--surface); }
+  .remove-token { border: 1px solid var(--line); border-radius: 5px; color: var(--muted); background: var(--surface); font: inherit; cursor: pointer; width: 2rem; flex: none; }
+  .remove-token:hover, .remove-token:focus-visible { border-color: var(--accent); color: var(--accent); }
+  .instruction { font-size: .93rem; color: var(--muted); margin: .1rem 0 0; }
+  .mini-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; font-size: .86rem; color: var(--muted); }
+  .reset-btn { background: transparent; border: 0; padding: .08rem .1rem; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .reset-btn:hover { color: var(--ink); }
+  .drag-ghost { position: fixed; z-index: 100; pointer-events: none; max-width: min(21rem, 76vw); width: max-content; padding: .6rem .8rem; background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 7px; color: var(--ink); font: 500 .92rem/1.6 var(--font); text-align: right; box-shadow: 0 10px 20px rgba(0,0,0,.13); opacity: .97; }
+  body.is-dragging { user-select: none; -webkit-user-select: none; cursor: grabbing; }
+  .bank-panel.is-hover { outline: 2px dashed var(--accent); outline-offset: 3px; }
+  .bank:empty::before { content: "تم تصنيف جميع البطاقات."; color: var(--muted); font-size: .92rem; padding: .5rem 0; }
+  .split-innovation .zone-body { min-height: 13rem; }
+  .split-innovation .bank .token { font-size: .94rem; }
+  @media (min-width: 1000px) { .split-innovation { grid-template-columns: minmax(18rem, 25rem) minmax(0,1fr); } }
+  @media (max-width: 639px) {
+    .zone-body { min-height: 5.75rem; }
+    .zone-body:empty::before { min-height: 4.5rem; }
+    .split-innovation .zone-body { min-height: 7rem; }
+    .bank-panel { padding: .3rem .85rem; }
+  }
+
+  /* Answer submission and review (no external libraries). */
+  :root { --good: #187449; --good-bg: #E5F5EB; --bad: #A83D3D; --bad-bg: #FBEAEA; }
+  :root[data-theme="dark"] { --good: #7ED4A1; --good-bg: #183C30; --bad: #FF9A91; --bad-bg: #472625; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --good: #7ED4A1; --good-bg: #183C30; --bad: #FF9A91; --bad-bg: #472625; }
+  }
+  .submission { margin: 1.25rem 0 2rem; padding: 1.35rem; background: var(--surface); border: 1px solid var(--line); border-radius: 9px; }
+  .submit-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .85rem; }
+  .submit-btn { cursor: pointer; background: var(--accent); color: var(--on-accent); border: 1px solid var(--accent); border-radius: 7px; padding: .7rem 1.4rem; font: 600 1rem/1.65 var(--font); }
+  .submit-btn:hover { filter: brightness(1.1); }
+  .submit-help { font-size: .87rem; color: var(--muted); }
+  .result { margin-top: 1.45rem; border-top: 1px solid var(--line); padding-top: 1.3rem; outline: none; }
+  .result[hidden] { display: none !important; }
+  .result-heading { margin: 0; font-size: 1.35rem; font-weight: 650; }
+  .result-score { margin: .3rem 0 .4rem; font-size: 1.05rem; }
+  .score-value { font-size: 1.35em; color: var(--accent); font-weight: 750; font-variant-numeric: tabular-nums; }
+  .result-note { margin: .3rem 0 1rem; font-size: .93rem; color: var(--muted); }
+  .key-title { font-size: 1.16rem; font-weight: 650; margin: 1.1rem 0 .7rem; }
+  .answer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,16.5rem),1fr)); gap: .75rem; }
+  .answer-group { border: 1px solid var(--line); border-radius: 7px; padding: .85rem; background: var(--bg); min-width: 0; }
+  .answer-group h3 { font-size: 1rem; line-height: 1.5; margin: 0 0 .5rem; font-weight: 700; }
+  .answer-items { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+  .answer-items li { display: flex; align-items: flex-start; gap: .43rem; line-height: 1.5; font-size: .9rem; border-bottom: 1px solid var(--line); padding-bottom: .35rem; }
+  .answer-items li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .answer-items .answer-mark { font-size: .96rem; width: 1.05rem; flex: 0 0 auto; font-weight: 700; }
+  .answer-items .answer-mark.hit { color: var(--good); }
+  .answer-items .answer-mark.miss { color: var(--bad); }
+  .key-section { padding-top: .5rem; }
+  .key-section + .key-section { border-top: 1px solid var(--line); margin-top: 1.1rem; }
+  .card.is-right { border-color: var(--good); }
+  .card.is-wrong { border-color: var(--bad); }
+  .opt.is-answer { background: var(--good-bg); border-color: var(--good); }
+  .opt.is-wrong-choice { background: var(--bad-bg); border-color: var(--bad); }
+  .answer-feedback { font-weight: 600; font-size: .9rem; border-radius: 5px; padding: .42rem .65rem; }
+  .answer-feedback.right { color: var(--good); background: var(--good-bg); }
+  .answer-feedback.wrong { color: var(--bad); background: var(--bad-bg); }
+  .zone-token.is-right { border-color: var(--good); background: var(--good-bg) !important; }
+  .zone-token.is-wrong { border-color: var(--bad); background: var(--bad-bg) !important; }
+  .review-legend { color: var(--muted); font-size: .85rem; padding-top: .45rem; }
+  .review-legend .yes { color: var(--good); font-weight: bold; }
+  .review-legend .no { color: var(--bad); font-weight: bold; }
+  @media (max-width: 639px) { .submission { padding: .9rem; } .submit-btn { width: 100%; } }
+</style>
+</head>
+<body>
+
+<div lang="ar" dir="rtl">
+  <header class="nav">
+    <div class="wrap">
+      <span class="brand">أنشطة الورشة</span>
+      <nav class="tabs" aria-label="الأنشطة">
+        <a class="tab" href="#activity-1" aria-label="النشاط 1">1</a>
+        <a class="tab" href="#activity-2" aria-label="النشاط 2">2</a>
+        <a class="tab" href="#activity-3" aria-label="النشاط 3">3</a>
+        <a class="tab" href="#activity-4" aria-label="النشاط 4">4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Activity 1 -->
+    <section id="sec-1" aria-labelledby="h-1">
+      <div class="wrap">
+        <div class="head">
+          <h1 id="h-1">النشاط <span class="num">1</span></h1>
+          <p class="lead">اقرؤوا كل مبادرة، ثم حددوا نوع الابتكار الذي تمثله، مع توضيح سبب اختياركم.</p>
+        </div>
+        <div class="cards" id="cards"></div>
+        <nav class="pager" aria-label="التنقل"><a class="next" href="#activity-2">النشاط التالي ←</a></nav>
+      </div>
+    </section>
+
+    <!-- Activity 2 -->
+    <section id="sec-2" aria-labelledby="h-2" hidden>
+      <div class="wrap">
+        <div class="head">
+          <h1 id="h-2">النشاط <span class="num">2</span></h1>
+          <p class="lead">في التقسيم التالي حدد الفئة الأكثر ملاءمة لكل أداة تغيير.</p>
+        </div>
+        <div class="split">
+          <div class="tools-panel bank-panel" data-bank><div class="bank-title">أدوات التغيير</div><div class="tools bank" data-tools></div></div>
+          <div class="areas">
+            <div class="band" data-band="classification">
+              <h2 class="band-title">أدوات التغيير الهادفة للتمكين <span class="en" dir="ltr">Enabling</span></h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head">أدوات المصداقية</div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">أدوات التواصل</div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">أدوات التدريب</div><div class="zone-body"></div></div>
+              </div>
+            </div>
+            <div class="band" data-band="classification">
+              <h2 class="band-title">أدوات التغيير الموضوعية <span class="en" dir="ltr">Substantive</span></h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head">الأدوات الفنية</div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">الأدوات الثقافية</div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">الأدوات السياسية</div><div class="zone-body"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="pager" aria-label="التنقل">
+          <a href="#activity-1">→ النشاط السابق</a>
+          <a class="next" href="#activity-3">النشاط التالي ←</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Activity 3 -->
+    <section id="sec-3" aria-labelledby="h-3" hidden>
+      <div class="wrap">
+        <div class="head">
+          <h1 id="h-3">النشاط <span class="num">3</span></h1>
+          <p class="lead">في التقسيم التالي حدد لكل أداة تغيير مستوى <strong>الاضطراب</strong> <span class="en" dir="ltr">Disruption</span> الذي تحدثه، ثم مستوى <strong>المصداقية</strong> <span class="en" dir="ltr">Credibility</span> المطلوب لتطبيق هذه الأداة حتى يكون لها التأثير الأكبر على المنظمة أو على المستهدفين للتغيير.</p>
+        </div>
+        <div class="split">
+          <div class="tools-panel bank-panel" data-bank><div class="bank-title">أدوات التغيير</div><div class="tools bank" data-tools></div></div>
+          <div class="areas">
+            <div class="band" data-band="disruption">
+              <h2 class="band-title">أ. مستوى الاضطراب <span class="en" dir="ltr">Disruption</span> الذي تحدثه</h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head">منخفض <span class="bars" data-l="1" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">متوسط <span class="bars" data-l="2" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">مرتفع <span class="bars" data-l="3" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+              </div>
+            </div>
+            <div class="band" data-band="credibility">
+              <h2 class="band-title">ب. مستوى المصداقية <span class="en" dir="ltr">Credibility</span> المطلوب</h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head">منخفض <span class="bars" data-l="1" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">متوسط <span class="bars" data-l="2" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head">مرتفع <span class="bars" data-l="3" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="zone-body"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="pager" aria-label="التنقل">
+          <a href="#activity-2">→ النشاط السابق</a>
+          <a class="next" href="#activity-4">النشاط التالي ←</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Activity 4 -->
+    <section id="sec-4" aria-labelledby="h-4" hidden>
+      <div class="wrap">
+        <div class="head">
+          <h1 id="h-4">النشاط <span class="num">4</span></h1>
+          <p class="lead">في التقسيم التالي حدد لكل أداة تغيير في المواقف عالية ومنخفضة العجلة أو الإلحاح <span class="en" dir="ltr">Urgency</span>، في أي مرحلة أو مراحل من مراحل التغيير الثلاثة يمكن أن يكون لتطبيق هذه الأداة التأثير الأكبر على المنظمة أو على المستهدفين للتغيير.</p>
+        </div>
+        <div class="split">
+          <div class="tools-panel bank-panel" data-bank><div class="bank-title">أدوات التغيير</div><div class="tools bank" data-tools></div></div>
+          <div class="areas seq">
+            <div class="band" data-band="low">
+              <h2 class="band-title">المواقف منخفضة العجلة أو الإلحاح <span class="en" dir="ltr">Low Urgency</span></h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التجهيز<span class="en" dir="ltr">Mobilization Phase</span></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التحرك<span class="en" dir="ltr">Movement Phase</span></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التثبيت<span class="en" dir="ltr">Sustain Phase</span></span></div><div class="zone-body"></div></div>
+              </div>
+            </div>
+            <div class="band" data-band="high">
+              <h2 class="band-title">المواقف عالية العجلة أو الإلحاح <span class="en" dir="ltr">High Urgency</span></h2>
+              <div class="zones">
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التجهيز<span class="en" dir="ltr">Mobilization Phase</span></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التحرك<span class="en" dir="ltr">Movement Phase</span></span></div><div class="zone-body"></div></div>
+                <div class="zone"><div class="zone-head"><span class="label">مرحلة التثبيت<span class="en" dir="ltr">Sustain Phase</span></span></div><div class="zone-body"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="pager" aria-label="التنقل">
+          <a href="#activity-3">→ النشاط السابق</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+    var types = [
+      ["الابتكار المُزعزع", "Disruptive"],
+      ["الابتكار الداعم", "Sustaining"],
+      ["ابتكار الكفاءة", "Efficiency"]
+    ];
+    var initiatives = [
+      "استخدمت شركة لوجستية نظامًا ذكيًا لتوزيع الشحنات بين المركبات وفقًا للمسافة والحمولة، مما خفّض عدد الرحلات المطلوبة وتكاليف التشغيل دون تغيير الخدمة المقدمة للعملاء.",
+      "طوّرت شركة تأمين نظامًا لتحليل بيانات العملاء، مما ساعدها على تقديم تغطيات أكثر دقة وخيارات إضافية لعملائها.",
+      "قدمت شركة برمجيات نسخة محدودة الوظائف من نظام إدارة الأعمال باشتراك شهري، تستهدف المتاجر الصغيرة التي كانت تعتمد على السجلات الورقية.",
+      "استثمرت شركة اتصالات في تطوير شبكتها لتقديم سرعات أعلى واتصال أكثر استقرارًا.",
+      "أطلقت شركة أجهزة منزلية غسالة، تستهدف الأسر التي كانت تعتمد على الغسيل اليدوي بسبب ارتفاع أسعار الغسالات التقليدية.",
+      "وحّدت شركة خدمات مالية إجراءات مراجعة المعاملات بين فروعها.",
+      "أطلقت شركة تعليمية منصة تقدم دورات قصيرة عبر الهواتف، تستهدف العاملين الذين لم يتمكنوا من الالتحاق بالبرامج التدريبية التقليدية.",
+      "أعادت شركة أغذية تصميم خطوط الإنتاج باستخدام أجهزة استشعار لمراقبة المواد الخام وتقليل الفاقد.",
+      "أضافت شركة أجهزة طبية خصائص تحليل متقدمة ودرجة دقة أعلى إلى أحد أجهزتها، استجابةً لاحتياجات المستشفيات الكبرى."
+    ];
+    var tools = [
+      "بدء مشروع تجريبي", "عقد مقابلات شخصية", "الحصول على دعم المدير التنفيذي",
+      "الحصول على دعم الاستشاري", "عقد اجتماعات مفتوحة", "إرسال إشعار بريدي",
+      "توفير تدريب خارجي لبناء المهارات", "توفير تدريب داخلي لبناء المهارات", "تنفيذ ما تقول",
+      "توضيح قيم المؤسسة", "بناء تحالف للدعم", "إعادة تنظيم المؤسسة",
+      "مراجعة نظام المكافآت", "تمييز متبني المبادرة", "مواجهة المعارض على انفراد",
+      "رواية قصة “نجاح”", "نشر تقارير تقدم العمل", "الإعلان عن الأهداف والمواعيد النهائية"
+    ];
+    // Activity 4's supplied phase table contains 15 change tools, not all 18.
+    // Source indices excluded: 2, 3, 8 (credibility-oriented tools).
+    var a4OriginalIds = [0,1,4,5,6,7,9,10,11,12,13,14,15,16,17];
+    var tools4 = a4OriginalIds.map(function(i) { return tools[i]; });
+    // 0=low, 1=medium, 2=high. Multiple phases are valid in Activity 4.
+    var lowDisruption = [1,2,3,7,12,13];
+    var mediumDisruption = [0,4,5,6,10];
+    var highDisruption = [8,9,11,14];
+    function makePhaseKey(first, second, third) {
+      return tools4.map(function(_, i) { var result = [];
+        if (first.indexOf(i) !== -1) result.push(0);
+        if (second.indexOf(i) !== -1) result.push(1);
+        if (third.indexOf(i) !== -1) result.push(2);
+        return result;
+      });
+    }
+    // The first supplied phase table is used for low urgency, the second for high urgency.
+    var keys = {
+      "1": {types: [2,1,0,1,0,2,0,2,1]},
+      "2": {classification: [2,1,0,0,1,1,2,2,0,4,5,3,3,5,5,4,4,3]},
+      "3": {disruption: [1,0,0,0,0,0,1,1,0,1,0,2,2,1,2,0,0,2],
+            credibility: [1,0,0,0,0,0,1,1,0,1,0,2,2,1,2,0,0,2]},
+      "4": {
+        low: makePhaseKey(lowDisruption.concat(mediumDisruption),
+          [1,3,13].concat(mediumDisruption,highDisruption),
+          lowDisruption.concat(mediumDisruption)),
+        high: makePhaseKey(lowDisruption,
+          lowDisruption.concat(mediumDisruption),
+          [1,3,13].concat(mediumDisruption,highDisruption))
+      }
+    };
+    var groupNames = {
+      "1": {types: ["الابتكار المُزعزع", "الابتكار الداعم", "ابتكار الكفاءة"]},
+      "2": {classification: ["أدوات المصداقية", "أدوات التواصل", "أدوات التدريب", "الأدوات الفنية", "الأدوات الثقافية", "الأدوات السياسية"]},
+      "3": {disruption: ["منخفض", "متوسط", "مرتفع"], credibility: ["منخفض", "متوسط", "مرتفع"]},
+      "4": {low: ["مرحلة التجهيز", "مرحلة التحرك", "مرحلة التثبيت"], high: ["مرحلة التجهيز", "مرحلة التحرك", "مرحلة التثبيت"]}
+    };
+
+
+  "use strict";
+  // Activity 1 uses single-choice answers. Activities 2–4 use drag-and-drop matching.
+  var bandsByActivity = {1:["types"], 2:["classification"], 3:["disruption", "credibility"], 4:["low", "high"]};
+  var storageKey = "workshop_matching_simple_ar_v3";
+  var saved = {};
+  var fromOld = false;
+  try {
+    var currentSave = localStorage.getItem(storageKey);
+    fromOld = !currentSave;
+    saved = JSON.parse(currentSave || localStorage.getItem("workshop_matching_simple_ar_v2") || "{}");
+  } catch (err) { saved = {}; }
+  var answers = {}, submitted = {"1":false,"2":false,"3":false,"4":false};
+  Object.keys(bandsByActivity).forEach(function (activity) {
+    answers[activity] = {};
+    bandsByActivity[activity].forEach(function (band) {
+      answers[activity][band] = {};
+      var raw = saved && saved[activity] && saved[activity][band];
+      if (!raw || typeof raw !== "object" || Array.isArray(raw)) return;
+      Object.keys(raw).forEach(function (oldId) {
+        if (!/^(0|[1-9][0-9]*)$/.test(oldId)) return;
+        var id = +oldId;
+        if (activity === "4" && fromOld) id = a4OriginalIds.indexOf(id);
+        var maxItems = activity === "1" ? initiatives.length : (activity === "4" ? tools4.length : tools.length);
+        if (id < 0 || id >= maxItems) return;
+        var val = raw[oldId];
+        if (activity === "4") {
+          var places = Array.isArray(val) ? val : [val];
+          places = Array.from(new Set(places.filter(function(p) { return Number.isInteger(p) && p >= 0 && p < 3; })));
+          if (places.length) answers[activity][band][id] = places;
+        } else {
+          var maxZones = activity === "2" ? 6 : 3;
+          if (Number.isInteger(val) && val >= 0 && val < maxZones) answers[activity][band][id] = val;
+        }
+      });
+    });
+  });
+  var selected = null;
+  var pointer = null;
+  var ghost = null;
+  var hoverElement = null;
+  var ignoreClick = false;
+  var scrollFrame = 0;
+  var live = document.createElement("span");
+  live.setAttribute("role", "status");
+  live.setAttribute("aria-live", "polite");
+  live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap";
+  document.body.appendChild(live);
+
+  function save() {
+    try { localStorage.setItem(storageKey, JSON.stringify(answers)); } catch (err) { /* file works without storage */ }
+  }
+  function content(activity) { return activity === "1" ? initiatives : (activity === "4" ? tools4 : tools); }
+  function section(activity) { return document.getElementById("sec-" + activity); }
+  function clearHover() {
+    if (hoverElement) hoverElement.classList.remove("is-hover");
+    hoverElement = null;
+  }
+  function announce(message) { live.textContent = message; }
+  function makeEl(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (typeof text === "string") el.textContent = text;
+    return el;
+  }
+  function itemLabel(activity, id) { return content(activity)[id]; }
+  function hasAnswer(activity, band, id, category) {
+    var actual = answers[activity][band][id];
+    return activity === "4" ? Array.isArray(actual) && actual.indexOf(category) !== -1 : actual === category;
+  }
+  function correctAnswer(activity, band, id, category) {
+    var expected = keys[activity][band][id];
+    return activity === "4" ? expected.indexOf(category) !== -1 : expected === category;
+  }
+  function cleanReview(activity) {
+    submitted[activity] = false;
+    var result = section(activity).querySelector(".result");
+    if (result) result.hidden = true;
+  }
+  function sameSets(a,b) {
+    if (!Array.isArray(a)) a = [];
+    if (a.length !== b.length) return false;
+    return b.every(function(n) { return a.indexOf(n) !== -1; });
+  }
+
+  function makeToken(activity, id, isPlaced, band, category) {
+    var button = makeEl("button", "token" + (isPlaced ? " zone-token" : " bank-token"));
+    button.type = "button";
+    button.dataset.activity = activity;
+    button.dataset.id = id;
+    if (isPlaced) {
+      button.dataset.band = band;
+      button.dataset.category = String(category);
+      if (submitted[activity]) button.classList.add(correctAnswer(activity,band,id,category) ? "is-right" : "is-wrong");
+    }
+    var number = makeEl("span", "tn", String(id + 1));
+    number.setAttribute("aria-hidden", "true");
+    button.appendChild(number);
+    button.appendChild(makeEl("span", "token-text", itemLabel(activity, id)));
+    var completed = bandsByActivity[activity].filter(function (b) {
+      var entry = answers[activity][b][id];
+      return activity === "4" ? Array.isArray(entry) && entry.length > 0 : Object.prototype.hasOwnProperty.call(answers[activity][b], id);
+    }).length;
+    if (!isPlaced && bandsByActivity[activity].length > 1 && completed > 0) {
+      button.appendChild(makeEl("span", "count", completed + "/2"));
+      if (completed === 2) button.classList.add("is-complete");
+    }
+    if (selected && selected.activity === activity && selected.id === id &&
+       Boolean(selected.fromBand) === Boolean(isPlaced) && (!isPlaced || selected.fromBand === band)) {
+      button.classList.add("is-selected");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.setAttribute("aria-pressed", "false");
+    }
+    button.title = "اسحب البطاقة أو اضغط عليها ثم على الفئة المطلوبة";
+    return button;
+  }
+  // Both 3 and 4 have two bands; each must receive its own answer for every lever.
+  function render(activity) {
+    var root = section(activity);
+    if (activity === "1") {
+      var cards = document.getElementById("cards");
+      var fragment = document.createDocumentFragment();
+      initiatives.forEach(function (text, id) {
+        var card = makeEl("article", "card");
+        if (submitted[activity]) card.classList.add(answers["1"].types[id] === keys["1"].types[id] ? "is-right" : "is-wrong");
+        card.appendChild(makeEl("span", "n", String(id + 1)));
+        card.appendChild(makeEl("p", "", text));
+        var options = makeEl("div", "opts");
+        options.setAttribute("role", "radiogroup");
+        options.setAttribute("aria-label", "نوع المبادرة " + (id + 1));
+        types.forEach(function (type, category) {
+          var button = makeEl("button", "opt");
+          button.type = "button";
+          if (submitted[activity] && category === keys["1"].types[id]) button.classList.add("is-answer");
+          if (submitted[activity] && category === answers["1"].types[id] && category !== keys["1"].types[id]) button.classList.add("is-wrong-choice");
+          button.setAttribute("role", "radio");
+          button.setAttribute("aria-checked", String(answers["1"].types[id] === category));
+          button.dataset.initiative = String(id);
+          button.dataset.choice = String(category);
+          var dot = makeEl("span", "dot");
+          dot.setAttribute("aria-hidden", "true");
+          button.appendChild(dot);
+          button.appendChild(makeEl("span", "", type[0]));
+          var en = makeEl("span", "en", type[1]);
+          en.dir = "ltr";
+          button.appendChild(en);
+          options.appendChild(button);
+        });
+        card.appendChild(options);
+        if (submitted[activity]) {
+          var isRight = answers["1"].types[id] === keys["1"].types[id];
+          card.appendChild(makeEl("div", "answer-feedback " + (isRight ? "right" : "wrong"),
+            (isRight ? "✓ إجابة صحيحة" : "الإجابة الصحيحة: " + types[keys["1"].types[id]][0])));
+        }
+        fragment.appendChild(card);
+      });
+      cards.replaceChildren(fragment);
+      root.querySelector(".progress").textContent = "تم الاختيار لـ " + Object.keys(answers["1"].types).length + " من 9 مبادرات";
+      return;
+    }
+    var list = root.querySelector(".bank");
+    var ids = content(activity);
+    var bankFragment = document.createDocumentFragment();
+    ids.forEach(function (_, i) {
+      if (bandsByActivity[activity].length === 1 &&
+        Object.prototype.hasOwnProperty.call(answers[activity][bandsByActivity[activity][0]], i)) return;
+      bankFragment.appendChild(makeToken(activity, i, false, null));
+    });
+    list.replaceChildren(bankFragment);
+    root.querySelectorAll(".zone").forEach(function (zone) {
+      var band = zone.dataset.band;
+      var category = +zone.dataset.category;
+      var zoneBody = zone.querySelector(".zone-body");
+      var placed = document.createDocumentFragment();
+      ids.forEach(function (_, i) {
+        if (!hasAnswer(activity,band,i,category)) return;
+        var wrap = makeEl("div", "placed");
+        wrap.appendChild(makeToken(activity, i, true, band, category));
+        var remove = makeEl("button", "remove-token", "×");
+        remove.type = "button";
+        remove.dataset.activity = activity;
+        remove.dataset.band = band;
+        remove.dataset.id = String(i);
+        remove.dataset.category = String(category);
+        remove.title = "إزالة البطاقة من هذه الفئة";
+        remove.setAttribute("aria-label", "إزالة " + (i+1) + " من هذه الفئة");
+        wrap.appendChild(remove);
+        placed.appendChild(wrap);
+      });
+      zoneBody.replaceChildren(placed);
+    });
+    var count = 0;
+    bandsByActivity[activity].forEach(function (b) { count += Object.keys(answers[activity][b]).length; });
+    root.querySelector(".progress").textContent = "تم تصنيف " + count + " من " + (ids.length * bandsByActivity[activity].length);
+  }
+  function renderAll() { ["1","2","3","4"].forEach(render); }
+  function setSelected(activity, id, fromBand) {
+    if (selected && selected.activity === activity && selected.id === id && selected.fromBand === fromBand) {
+      selected = null;
+    } else {
+      selected = {activity:activity, id:id, fromBand:fromBand};
+    }
+    render(activity);
+    if (selected) announce("تم اختيار البطاقة " + (id+1) + ". اضغط على الفئة المطلوبة.");
+    else announce("تم إلغاء تحديد البطاقة.");
+  }
+  function place(activity, id, band, category) {
+    if (!answers[activity] || !answers[activity][band]) return;
+    if (activity === "4") {
+      var current = answers[activity][band][id] || [];
+      if (current.indexOf(category) === -1) answers[activity][band][id] = current.concat(category).sort();
+    } else answers[activity][band][id] = category;
+    selected = null;
+    cleanReview(activity);
+    save();
+    render(activity);
+    announce("تم وضع البطاقة " + (+id+1) + " في الفئة المحددة.");
+  }
+  function remove(activity, id, band, category) {
+    if (!answers[activity] || !answers[activity][band]) return;
+    if (activity === "4") {
+      var remain = (answers[activity][band][id] || []).filter(function(c) { return c !== category; });
+      if (remain.length) answers[activity][band][id] = remain;
+      else delete answers[activity][band][id];
+    } else delete answers[activity][band][id];
+    selected = null;
+    cleanReview(activity);
+    save();
+    render(activity);
+    announce("تمت إزالة البطاقة " + (+id+1) + " من الفئة المحددة.");
+  }
+
+  ["1","2","3","4"].forEach(function (activity) {
+    var root = section(activity);
+    var eachBand = {};
+    root.querySelectorAll(".band[data-band]").forEach(function (bandDiv) {
+      var band = bandDiv.dataset.band;
+      if (!Object.prototype.hasOwnProperty.call(eachBand, band)) eachBand[band] = 0;
+      bandDiv.querySelectorAll(".zone").forEach(function (zone) {
+        var index = eachBand[band]++;
+        zone.dataset.activity = activity;
+        zone.dataset.band = band;
+        zone.dataset.category = index;
+        zone.tabIndex = 0;
+        zone.setAttribute("role", "button");
+        var label = zone.querySelector(".zone-head").textContent.replace(/\s+/g," ").trim();
+        zone.setAttribute("aria-label", "ضع البطاقة في " + label);
+        zone.setAttribute("title", "اسحب بطاقة إلى هنا أو اختر بطاقة ثم اضغط هنا");
+      });
+    });
+    var bank = root.querySelector(".bank-panel");
+    if (bank) bank.dataset.bank = activity;
+    var head = root.querySelector(".head");
+    var hint = makeEl("p", "instruction", activity === "1"
+      ? "اختر نوع الابتكار المناسب لكل مبادرة بالضغط على إحدى الإجابات الثلاث."
+      : "اسحب كل بطاقة إلى الفئة المناسبة، أو اضغط البطاقة ثم اضغط على الفئة.");
+    head.appendChild(hint);
+    if (activity === "3") {
+      head.appendChild(makeEl("p", "instruction", "يمكن استخدام كل أداة مرة في كل قسم من القسمين."));
+    } else if (activity === "4") {
+      head.appendChild(makeEl("p", "instruction", "قد تكون الأداة مناسبة لأكثر من مرحلة. يمكنك إضافتها إلى عدة مراحل، حتى داخل القسم نفسه. يعرض هذا النشاط الأدوات الـ15 الواردة في مفتاح الإجابة."));
+    }
+    var controls = makeEl("div", "mini-controls");
+    controls.appendChild(makeEl("span", "progress", ""));
+    var reset = makeEl("button", "reset-btn", "إعادة البدء");
+    reset.type = "button";
+    reset.dataset.reset = activity;
+    controls.appendChild(reset);
+    head.appendChild(controls);
+    var submission = makeEl("div", "submission");
+    var actionsRow = makeEl("div", "submit-actions");
+    var submitButton = makeEl("button", "submit-btn", "إرسال الإجابات وعرض الحل");
+    submitButton.type = "button";
+    submitButton.dataset.submit = activity;
+    actionsRow.appendChild(submitButton);
+    actionsRow.appendChild(makeEl("span", "submit-help", "سيظهر تقييم اختياراتك ومفتاح الإجابات الصحيح لهذا النشاط."));
+    submission.appendChild(actionsRow);
+    var result = makeEl("div", "result");
+    result.hidden = true;
+    result.tabIndex = -1;
+    result.setAttribute("aria-label", "مراجعة إجابات النشاط " + activity);
+    submission.appendChild(result);
+    root.querySelector(".pager").before(submission);
+  });
+  renderAll();
+
+  function reviewCount(activity) {
+    var total = 0, right = 0;
+    bandsByActivity[activity].forEach(function(band) {
+      keys[activity][band].forEach(function(expected, id) {
+        total++;
+        var actual = answers[activity][band][id];
+        var good = activity === "4" ? sameSets(actual,expected) : actual === expected;
+        if (good) right++;
+      });
+    });
+    return {right:right,total:total};
+  }
+  function makeAnswerGroup(activity, band, category) {
+    var group = makeEl("section", "answer-group");
+    group.appendChild(makeEl("h3", "", groupNames[activity][band][category]));
+    var list = makeEl("ul", "answer-items");
+    var key = keys[activity][band];
+    key.forEach(function(value,id) {
+      if (!correctAnswer(activity,band,id,category)) return;
+      var item = makeEl("li", "");
+      var hit = hasAnswer(activity,band,id,category);
+      var mark = makeEl("span", "answer-mark " + (hit ? "hit" : "miss"), hit ? "✓" : "○");
+      mark.setAttribute("aria-label", hit ? "تم اختيارها" : "لم يتم اختيارها");
+      item.appendChild(mark);
+      item.appendChild(makeEl("span", "", activity === "1" ? "المبادرة " + (id+1) : content(activity)[id]));
+      list.appendChild(item);
+    });
+    group.appendChild(list);
+    return group;
+  }
+  function renderReview(activity) {
+    var result = section(activity).querySelector(".result");
+    result.replaceChildren();
+    var s = reviewCount(activity);
+    result.appendChild(makeEl("h2", "result-heading", "نتيجة النشاط " + activity));
+    var score = makeEl("p", "result-score");
+    score.appendChild(makeEl("span", "score-value", s.right + " / " + s.total));
+    score.appendChild(document.createTextNode(" إجابة مكتملة وصحيحة"));
+    result.appendChild(score);
+    result.appendChild(makeEl("p", "result-note", activity === "4"
+       ? "التقييم هنا يعتمد على اختيار جميع المراحل الصحيحة لكل أداة في كل موقف؛ لا يُعد وضعها في مرحلة واحدة صحيحًا إذا كانت تنتمي إلى أكثر من مرحلة."
+       : "تُحسب الإجابة صحيحة فقط عند مطابقة التصنيف المطلوب. ويمكن تعديل إجاباتك ثم الإرسال مرة أخرى."));
+    result.appendChild(makeEl("div", "review-legend", "✓ إجابة صحيحة اخترتها   ·   ○ إجابة صحيحة لم تخترها. تظهر اختياراتك الزائدة باللون الأحمر في مناطق التصنيف."));
+    result.appendChild(makeEl("h3", "key-title", "مفتاح الإجابات الصحيح"));
+    var bandLabels = {
+      "1": {types:"أنواع الابتكار"},
+      "2": {classification:"فئات أدوات التغيير"},
+      "3": {disruption:"أ. مستوى الاضطراب",credibility:"ب. مستوى المصداقية"},
+      "4": {low:"المواقف منخفضة العجلة أو الإلحاح",high:"المواقف عالية العجلة أو الإلحاح"}
+    };
+    bandsByActivity[activity].forEach(function(band) {
+      var sec = makeEl("section", "key-section");
+      if (bandsByActivity[activity].length > 1) {
+         var bandHeading = makeEl("h3", "key-title", bandLabels[activity][band]);
+         if (activity === "4") {
+           bandHeading.appendChild(document.createTextNode(" "));
+           var enUrgency = makeEl("span", "en", "Urgency");
+           enUrgency.dir = "ltr";
+           bandHeading.appendChild(enUrgency);
+         }
+         sec.appendChild(bandHeading);
+       }
+      var grid = makeEl("div", "answer-groups");
+      groupNames[activity][band].forEach(function(_, category) {
+        grid.appendChild(makeAnswerGroup(activity,band,category));
+      });
+      sec.appendChild(grid);
+      result.appendChild(sec);
+    });
+    result.hidden = false;
+  }
+  function submitActivity(activity) {
+    selected = null;
+    submitted[activity] = true;
+    render(activity);
+    renderReview(activity);
+    var result = section(activity).querySelector(".result");
+    result.scrollIntoView({behavior:"smooth", block:"start"});
+    announce("تم إرسال إجابات النشاط " + activity + "، وتم عرض التقييم والحل الصحيح.");
+  }
+
+  function activateZone(zone) {
+    if (!selected || selected.activity !== zone.dataset.activity) return;
+    place(selected.activity, selected.id, zone.dataset.band, +zone.dataset.category);
+  }
+  document.addEventListener("click", function (ev) {
+    if (ignoreClick) return;
+    var submit = ev.target.closest("[data-submit]");
+    if (submit) { submitActivity(submit.dataset.submit); return; }
+    var reset = ev.target.closest("[data-reset]");
+    if (reset) {
+      var activity = reset.dataset.reset;
+      if (!window.confirm("هل تريد إعادة جميع بطاقات النشاط " + activity + " إلى البداية؟")) return;
+      bandsByActivity[activity].forEach(function (band) { answers[activity][band] = {}; });
+      selected = null;
+      cleanReview(activity);
+      save();
+      render(activity);
+      return;
+    }
+    var option = ev.target.closest("#sec-1 .opt[data-initiative]");
+    if (option) {
+      var id = +option.dataset.initiative;
+      var category = +option.dataset.choice;
+      if (answers["1"].types[id] === category) delete answers["1"].types[id];
+      else answers["1"].types[id] = category;
+      cleanReview("1");
+      save();
+      render("1");
+      return;
+    }
+    var removeBtn = ev.target.closest(".remove-token");
+    if (removeBtn) {
+      remove(removeBtn.dataset.activity, +removeBtn.dataset.id, removeBtn.dataset.band, +removeBtn.dataset.category);
+      return;
+    }
+    var token = ev.target.closest(".token");
+    if (token) {
+      setSelected(token.dataset.activity, +token.dataset.id, token.dataset.band || null);
+      return;
+    }
+    var zone = ev.target.closest(".zone[data-category]");
+    if (zone) activateZone(zone);
+  });
+  document.addEventListener("keydown", function (ev) {
+    var zone = ev.target.closest(".zone[data-category]");
+    if (zone && (ev.key === "Enter" || ev.key === " ")) {
+      ev.preventDefault();
+      activateZone(zone);
+    }
+  });
+
+  // Pointer events are used so actual dragging works with mouse, trackpad and touch.
+  function getTargetAt(x, y, activity) {
+    var el = document.elementFromPoint(x, y);
+    if (!el) return null;
+    var zone = el.closest(".zone[data-activity]");
+    if (zone && zone.dataset.activity === activity) return zone;
+    var bank = el.closest(".bank-panel[data-bank]");
+    if (bank && bank.dataset.bank === activity) return bank;
+    return null;
+  }
+  function moveGhost(x, y) {
+    if (!ghost) return;
+    // Keep the pointer outside the text block so the destination remains visible.
+    ghost.style.left = Math.min(x + 13, window.innerWidth - Math.min(300,window.innerWidth*.76) - 4) + "px";
+    ghost.style.top = Math.max(2, Math.min(y + 14, window.innerHeight - 75)) + "px";
+  }
+  function setHover(target) {
+    if (target === hoverElement) return;
+    clearHover();
+    if (target) { target.classList.add("is-hover"); hoverElement = target; }
+  }
+  function autoScroll() {
+    if (!pointer || !pointer.dragStarted) { scrollFrame = 0; return; }
+    var y = pointer.y;
+    var edge = 80;
+    var speed = 0;
+    if (y > window.innerHeight - edge) speed = Math.min(19, (y - (window.innerHeight - edge)) / 4 + 3);
+    else if (y < edge) speed = -Math.min(19, (edge - y) / 4 + 3);
+    if (speed) {
+      window.scrollBy(0, speed);
+      setHover(getTargetAt(pointer.x, pointer.y, pointer.activity));
+    }
+    scrollFrame = window.requestAnimationFrame(autoScroll);
+  }
+  document.addEventListener("pointerdown", function (ev) {
+    if (ev.button !== 0 || pointer || ev.target.closest(".remove-token")) return;
+    var token = ev.target.closest(".token");
+    if (!token) return;
+    pointer = {
+      pointerId: ev.pointerId, activity: token.dataset.activity,
+      id: +token.dataset.id, sourceBand: token.dataset.band || null, sourceCategory: token.dataset.category === undefined ? null : +token.dataset.category,
+      x0: ev.clientX, y0: ev.clientY, x:ev.clientX, y:ev.clientY,
+      dragStarted:false, source:token
+    };
+  });
+  document.addEventListener("pointermove", function (ev) {
+    if (!pointer || ev.pointerId !== pointer.pointerId) return;
+    pointer.x = ev.clientX;
+    pointer.y = ev.clientY;
+    if (!pointer.dragStarted) {
+      if (Math.hypot(pointer.x-pointer.x0, pointer.y-pointer.y0) < 8) return;
+      pointer.dragStarted = true;
+      pointer.source.classList.add("is-dragging");
+      document.body.classList.add("is-dragging");
+      ghost = makeEl("div", "drag-ghost", (pointer.id+1) + " · " + itemLabel(pointer.activity, pointer.id));
+      document.body.appendChild(ghost);
+      scrollFrame = window.requestAnimationFrame(autoScroll);
+    }
+    if (ev.cancelable) ev.preventDefault();
+    moveGhost(pointer.x, pointer.y);
+    setHover(getTargetAt(pointer.x, pointer.y, pointer.activity));
+  }, {passive:false});
+  function endPointer(ev, cancelled) {
+    if (!pointer || ev.pointerId !== pointer.pointerId) return;
+    var wasDragging = pointer.dragStarted;
+    var activity = pointer.activity, id = pointer.id, fromBand = pointer.sourceBand, sourceCategory = pointer.sourceCategory;
+    var target = !cancelled && wasDragging ? getTargetAt(ev.clientX, ev.clientY, activity) : null;
+    pointer = null;
+    if (ghost) { ghost.remove(); ghost=null; }
+    clearHover();
+    document.body.classList.remove("is-dragging");
+    if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+    if (wasDragging) {
+      ignoreClick = true;
+      window.setTimeout(function () { ignoreClick = false; }, 120);
+      if (target && target.classList.contains("zone")) {
+        place(activity, id, target.dataset.band, +target.dataset.category);
+      } else if (target && target.classList.contains("bank-panel") && fromBand) {
+        remove(activity, id, fromBand, sourceCategory);
+      }
+    }
+  }
+  document.addEventListener("pointerup", function (ev) { endPointer(ev, false); });
+  document.addEventListener("pointercancel", function (ev) { endPointer(ev, true); });
+  window.addEventListener("blur", function () {
+    if (!pointer) return;
+    endPointer({pointerId:pointer.pointerId}, true);
+  });
+
+  // Original four-button navigation preserved.
+  var tabs = document.querySelectorAll(".tab");
+  function show() {
+    var match = /activity-([1-4])/.exec(location.hash);
+    var n = match ? +match[1] : 1;
+    selected = null;
+    for (var i = 1; i <= 4; i++) {
+      document.getElementById("sec-" + i).hidden = i !== n;
+      if (i === n) tabs[i-1].setAttribute("aria-current", "page");
+      else tabs[i-1].removeAttribute("aria-current");
+    }
+    render(String(n));
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange", show);
+  show();
+
+})();
+</script>
+
+</body></html>
